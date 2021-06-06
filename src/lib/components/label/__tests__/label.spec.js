@@ -5,8 +5,9 @@ import SingleLabel from './SingleLabel.test.svelte'
 import MultipleLabels from './MultipleLabels.test.svelte'
 
 jest.mock('../../../internal/useId')
+
 // there seems to be an extra wrapping div in these tests from the slot in LabelProvider,
-// but doesnt happen on actual usage.
+// yet not in actual usage. so we need to drill down to container.firstChild.firstChild for assertions
 // not sure who's to blame - me? svelte-jester? jsdom? testing-library?
 
 test('should be possible to use a LabelProvider without using a Label', () => {

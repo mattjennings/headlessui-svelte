@@ -7,7 +7,9 @@ interface Props extends Record<string, any> {
 interface Events extends Record<string, any> {}
 
 interface Slots {
-  labbelledby: string
+  default: {
+    labelledby?: string
+  }
 }
 
 export interface LabelContext {
