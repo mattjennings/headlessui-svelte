@@ -1,5 +1,5 @@
 <script>
-  import { useId } from '../../internal/useId'
+  import { useId } from '../../internal/use-id'
   import { getDescriptionContext } from './DescriptionProvider.svelte'
 
   const context = getDescriptionContext()

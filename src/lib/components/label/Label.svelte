@@ -1,5 +1,5 @@
 <script>
-  import { useId } from '../../internal/useId'
+  import { useId } from '../../internal/use-id'
   import { getLabelContext } from './LabelProvider.svelte'
 
   const context = getLabelContext()

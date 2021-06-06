@@ -1,5 +1,5 @@
 <script>
-  import { createEventForwarder } from '$lib/internal/createEventForwarder'
+  import { createEventForwarder } from '$lib/internal/create-event-forwarder'
 
   import { getContext, createEventDispatcher } from 'svelte'
 

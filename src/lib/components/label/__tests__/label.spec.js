@@ -4,7 +4,7 @@ import NoLabel from './NoLabel.test.svelte'
 import SingleLabel from './SingleLabel.test.svelte'
 import MultipleLabels from './MultipleLabels.test.svelte'
 
-jest.mock('../../../internal/useId')
+jest.mock('../../../internal/use-id')
 
 // there seems to be an extra wrapping div in these tests from the slot in LabelProvider,
 // yet not in actual usage. so we need to drill down to container.firstChild.firstChild for assertions

@@ -4,7 +4,7 @@ import NoDescription from './NoDescription.test.svelte'
 import SingleDescription from './SingleDescription.test.svelte'
 import MultipleDescriptions from './MultipleDescriptions.test.svelte'
 
-jest.mock('../../../internal/useId')
+jest.mock('../../../internal/use-id')
 
 // there seems to be an extra wrapping div in these tests from the slot in DescriptionProvider,
 // yet not in actual usage. so we need to drill down to container.firstChild.firstChild for assertions
