@@ -1,38 +1,35 @@
-# create-svelte
+# headlessui-svelte
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
+Unofficial [Headless UI](https://headlessui.dev) Svelte components
 
-## Creating a project
+## Caveats
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Until [dynamic elements](https://github.com/sveltejs/svelte/issues/2324) are officially supported by svelte, the `as` prop is not possible
+  - currently looking into [svelte-elements](https://github.com/timhall/svelte-elements) as a temporary dependency
 
-```bash
-# create a new project in the current directory
-npm init svelte@next
+## TODO
 
-# create a new project in my-app
-npm init svelte@next my-app
+### Components
+
+- [x] Switch
+- [ ] Menu
+- [ ] Listbox
+- [ ] Disclosure
+- [ ] Dialog
+- [ ] Popover
+- [ ] Radio Group
+- [ ] Transition
+
+### Event forwarding
+
+With React/Vue, events are handled via props and can be forwarded by passing the props along to the child component. In svelte, events have to be explicitly forwarded (pending https://github.com/sveltejs/svelte/issues/2837 if it ever gets merged).
+
+It may have to mean that internal components manually forward each event type like so:
+
+```svelte
+<!-- SomeComponent.svelte -->
+
+<div on:click on:mousedown on:mouseup ... />
 ```
 
-> Note: the `@next` is temporary
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-Before creating a production version of your app, install an [adapter](https://kit.svelte.dev/docs#adapters) for your target environment. Then:
-
-```bash
-npm run build
-```
-
-> You can preview the built app with `npm run preview`, regardless of whether you installed an adapter. This should _not_ be used to serve your app in production.
+but maybe there's a way to convert React/Vue-like `onXYZ` props to event listeners dynamically. Need to look into this.
