@@ -4,6 +4,11 @@
 
   const context = getLabelContext()
 
+  if (context === null) {
+    let err = new Error('You used a <Label /> component, but it is not inside a relevant parent.')
+    throw err
+  }
+
   const idStore = useId()
 
   const id = `headlessui-label-${$idStore}`
