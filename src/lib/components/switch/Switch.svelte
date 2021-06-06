@@ -2,13 +2,17 @@
   import { createEventForwarder } from '$lib/internal/create-event-forwarder'
 
   import { getContext, createEventDispatcher } from 'svelte'
+  import { getDescriptionContext } from '../description/DescriptionProvider.svelte'
+  import { getLabelContext } from '../label/LabelProvider.svelte'
+  import { getGroupContext } from './SwitchGroup.svelte'
 
-  /**
-   * @event {EventDetail} change
-   */
+  let element
+
   const dispatch = createEventDispatcher()
   const forwardEvent = createEventForwarder()
-  const groupContext = getContext('headlessui-switch')
+  const groupContext = getGroupContext()
+  const labelContext = getLabelContext()
+  const descriptionContext = getDescriptionContext()
 
   // ---
 
@@ -44,15 +48,22 @@
   // ---
 
   $: dispatch('change', checked)
+  $: registerElement(element)
+
+  function registerElement(element) {
+    groupContext?.update((prev) => ({ ...prev, switch: element }))
+    console.log($groupContext)
+  }
 
 </script>
 
 <button
+  bind:this={element}
   role="switch"
   tabIndex={0}
   aria-checked={checked}
-  aria-labelledby={groupContext?.labelledby}
-  aria-describedby={groupContext?.describedby}
+  aria-labelledby={$labelContext?.labelledby}
+  aria-describedby={$descriptionContext?.describedby}
   on:click={handleClick}
   on:keyup={handleKeyUp}
   on:keypress={handleKeyPress}

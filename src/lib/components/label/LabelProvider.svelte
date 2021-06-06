@@ -15,6 +15,7 @@
 
 <script>
   export let name = undefined
+  export let props
 
   let labelIds = []
 
@@ -31,16 +32,19 @@
 
   const context = writable({
     name,
-    props: $$restProps,
+    props,
     register
   })
 
   setContext(LABEL_CONTEXT_KEY, context)
 
-  $: context.update((prev) => ({ ...prev, name, props: $$restProps }))
-
-  $: labelledby = labelIds.length > 0 ? labelIds.join(' ') : undefined
+  $: context.update((prev) => ({
+    ...prev,
+    name,
+    props,
+    labelledby: labelIds.length > 0 ? labelIds.join(' ') : undefined
+  }))
 
 </script>
 
-<slot {labelledby} />
+<slot labelledby={$context.labelledby} />

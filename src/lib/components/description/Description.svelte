@@ -1,8 +1,11 @@
 <script>
+  import { createEventForwarder } from '$lib/internal/create-event-forwarder'
+
   import { useId } from '../../internal/use-id'
   import { getDescriptionContext } from './DescriptionProvider.svelte'
 
   const context = getDescriptionContext()
+  const forwarder = createEventForwarder()
 
   if (context === null) {
     let err = new Error(
@@ -20,4 +23,13 @@
 </script>
 
 <!-- svelte-ignore a11y-description-has-associated-control -->
-<p {id} {...$$restProps}><slot /></p>
+<p
+  {id}
+  {...$$restProps}
+  on:click={(ev) => {
+    $context.props?.onClick(ev)
+    forwarder(ev)
+  }}
+>
+  <slot />
+</p>

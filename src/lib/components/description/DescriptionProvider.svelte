@@ -15,6 +15,7 @@
 
 <script>
   export let name = undefined
+  export let props = undefined
 
   let descriptionIds = []
 
@@ -31,16 +32,19 @@
 
   const context = writable({
     name,
-    props: $$restProps,
+    props,
     register
   })
 
   setContext(DESCRIPTION_CONTEXT_KEY, context)
 
-  $: context.update((prev) => ({ ...prev, name, props: $$restProps }))
-
-  $: describedby = descriptionIds.length > 0 ? descriptionIds.join(' ') : undefined
+  $: context.update((prev) => ({
+    ...prev,
+    name,
+    props,
+    describedby: descriptionIds.length > 0 ? descriptionIds.join(' ') : undefined
+  }))
 
 </script>
 
-<slot {describedby} />
+<slot describedby={$context.describedby} />

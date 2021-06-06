@@ -1,11 +1,11 @@
 import { SvelteComponentTyped } from 'svelte'
+import { Writable } from 'svelte/store'
 
 type Props = Record<string, any>
 export interface SwitchGroupContext {
   switch: HTMLButtonElement | null
-  setSwitch(element: HTMLButtonElement): void
-  labelledby: string | undefined
-  describedby: string | undefined
 }
+
+export function getGroupContext(): Writable<SwitchGroupContext>
 
 export default class Component extends SvelteComponentTyped<Props> {}

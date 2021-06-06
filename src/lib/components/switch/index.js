@@ -1,15 +1,10 @@
-import SwitchDescription from './SwitchDescription.svelte'
+import Description from '../description/Description.svelte'
 import SwitchGroup from './SwitchGroup.svelte'
-import SwitchLabel from './SwitchLabel.svelte'
+import Label from '../label/Label.svelte'
 import Switch from './Switch.svelte'
 
-Switch.Description = SwitchDescription
 Switch.Group = SwitchGroup
-Switch.Label = SwitchLabel
+Switch.Description = Description
+Switch.Label = Label
 
 export { Switch }
-// export const Switch = {
-//   Description: SwitchDescription,
-//   Group: SwitchGroup,
-//   Label: SwitchLabel
-// }
