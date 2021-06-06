@@ -15,7 +15,7 @@
 
 <script>
   export let name = undefined
-  export let props = undefined
+  export let props = {}
 
   let descriptionIds = []
 

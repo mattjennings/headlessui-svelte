@@ -1,7 +1,7 @@
 <script>
-  import { createEventForwarder } from '$lib/internal/create-event-forwarder'
-
-  import { getContext, createEventDispatcher } from 'svelte'
+  import { createEventForwarder } from '../../internal/create-event-forwarder'
+  import Render from '../render/Render.svelte'
+  import { createEventDispatcher } from 'svelte'
   import { getDescriptionContext } from '../description/DescriptionProvider.svelte'
   import { getLabelContext } from '../label/LabelProvider.svelte'
   import { getGroupContext } from './SwitchGroup.svelte'
@@ -52,13 +52,13 @@
 
   function registerElement(element) {
     groupContext?.update((prev) => ({ ...prev, switch: element }))
-    console.log($groupContext)
   }
 
 </script>
 
-<button
-  bind:this={element}
+<Render
+  as="button"
+  bind:el={element}
   role="switch"
   tabIndex={0}
   aria-checked={checked}
@@ -70,4 +70,4 @@
   {...$$restProps}
 >
   <slot />
-</button>
+</Render>

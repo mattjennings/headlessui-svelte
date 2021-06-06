@@ -15,7 +15,7 @@
 
 <script>
   export let name = undefined
-  export let props
+  export let props = {}
 
   let labelIds = []
 

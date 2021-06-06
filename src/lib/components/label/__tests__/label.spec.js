@@ -1,10 +1,11 @@
 import { render } from '@testing-library/svelte'
-
+import whitespace from 'dom-whitespace'
 import NoLabel from './NoLabel.test.svelte'
 import SingleLabel from './SingleLabel.test.svelte'
 import MultipleLabels from './MultipleLabels.test.svelte'
 
 jest.mock('../../../internal/use-id')
+jest.mock('../../elements')
 
 // there seems to be an extra wrapping div in these tests from the slot in LabelProvider,
 // yet not in actual usage. so we need to drill down to container.firstChild.firstChild for assertions
@@ -23,6 +24,7 @@ test('should be possible to use a LabelProvider without using a Label', () => {
 test('should be possible to use a LabelProvider and a single Label, and have them linked', () => {
   const { container } = render(SingleLabel)
 
+  whitespace.remove(window.document)
   expect(container.firstChild.firstChild).toMatchInlineSnapshot(`
       <div
         aria-labelledby="headlessui-label-1"
@@ -32,7 +34,6 @@ test('should be possible to use a LabelProvider and a single Label, and have the
         >
           I am a label
         </label>
-         
         <span>
           Contents
         </span>
@@ -43,6 +44,7 @@ test('should be possible to use a LabelProvider and a single Label, and have the
 test('should be possible to use a LabelProvider and multiple Label components, and have them linked', () => {
   const { container } = render(MultipleLabels)
 
+  whitespace.remove(window.document)
   expect(container.firstChild.firstChild).toMatchInlineSnapshot(`
     <div
       aria-labelledby="headlessui-label-1 headlessui-label-2"
@@ -52,11 +54,9 @@ test('should be possible to use a LabelProvider and multiple Label components, a
       >
         I am a label
       </label>
-       
       <span>
         Contents
       </span>
-       
       <label
         id="headlessui-label-2"
       >

@@ -1,13 +1,15 @@
 <script>
-  import { createEventForwarder } from '$lib/internal/create-event-forwarder'
-
+  import { createEventForwarder } from '../../internal/create-event-forwarder'
+  import Render from '../render/Render.svelte'
   import { useId } from '../../internal/use-id'
   import { getDescriptionContext } from './DescriptionProvider.svelte'
+
+  export let as = 'p'
 
   const context = getDescriptionContext()
   const forwarder = createEventForwarder()
 
-  if (context === null) {
+  if (!context) {
     let err = new Error(
       'You used a <Description /> component, but it is not inside a relevant parent.'
     )
@@ -23,13 +25,12 @@
 </script>
 
 <!-- svelte-ignore a11y-description-has-associated-control -->
-<p
+<Render
+  {as}
   {id}
   {...$$restProps}
   on:click={(ev) => {
     $context.props?.onClick(ev)
     forwarder(ev)
-  }}
+  }}><slot /></Render
 >
-  <slot />
-</p>

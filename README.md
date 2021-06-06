@@ -4,8 +4,27 @@ Unofficial [Headless UI](https://headlessui.dev) Svelte components
 
 ## Caveats
 
-- Until [dynamic elements](https://github.com/sveltejs/svelte/issues/2324) are officially supported by svelte, the `as` prop is not possible
-  - currently looking into [svelte-elements](https://github.com/timhall/svelte-elements) as a temporary dependency
+### Dynamic elements
+
+Until [dynamic elements](https://github.com/sveltejs/svelte/issues/2324) are officially supported by svelte, I'm using [svelte-elements](https://github.com/timhall/svelte-elements) as a temporary dependency for the `as` prop.
+
+### Event forwarding
+
+With React/Vue, events are handled via props and can be forwarded by passing the props along to the child component. In svelte, events have to be explicitly forwarded (pending https://github.com/sveltejs/svelte/issues/2837).
+
+It may have to mean that internal components manually forward each event type like so:
+
+```svelte
+<!-- Switch.svelte -->
+
+<button {...props} on:click on:mousedown on:mouseup ... />
+```
+
+but perhaps there's a way to convert React/Vue-like `onXYZ` props to event listeners dynamically and workaround this. It's not the Svelte way, but manually typing all events on every component is not ideal.
+
+### Typescript
+
+- Typescript support is partial right now. While headlessui-specific props will be typed, they won't have types for inherited HTML attributes or events. I would like to use an existing types package to do those, but I haven't found one for Svelte yet.
 
 ## TODO
 
@@ -19,17 +38,3 @@ Unofficial [Headless UI](https://headlessui.dev) Svelte components
 - [ ] Popover
 - [ ] Radio Group
 - [ ] Transition
-
-### Event forwarding
-
-With React/Vue, events are handled via props and can be forwarded by passing the props along to the child component. In svelte, events have to be explicitly forwarded (pending https://github.com/sveltejs/svelte/issues/2837 if it ever gets merged).
-
-It may have to mean that internal components manually forward each event type like so:
-
-```svelte
-<!-- SomeComponent.svelte -->
-
-<div on:click on:mousedown on:mouseup ... />
-```
-
-but maybe there's a way to convert React/Vue-like `onXYZ` props to event listeners dynamically. Need to look into this.
