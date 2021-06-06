@@ -22,4 +22,4 @@ export interface DescriptionContext {
 
 export function getDescriptionContext(): Writable<DescriptionContext>
 
-export default class Component extends SvelteComponentTyped<Props, Events, Slots> {}
+export default class DescriptionProvider extends SvelteComponentTyped<Props, Events, Slots> {}

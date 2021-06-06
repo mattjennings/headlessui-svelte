@@ -8,4 +8,4 @@ export interface SwitchGroupContext {
 
 export function getGroupContext(): Writable<SwitchGroupContext>
 
-export default class Component extends SvelteComponentTyped<Props> {}
+export default class SwitchGroup extends SvelteComponentTyped<Props> {}

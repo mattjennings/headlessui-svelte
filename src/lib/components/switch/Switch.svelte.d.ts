@@ -4,4 +4,4 @@ interface Props extends Record<string, any> {
   checked?: boolean
 }
 
-export default class Component extends SvelteComponentTyped<Props> {}
+export default class Switch extends SvelteComponentTyped<Props> {}

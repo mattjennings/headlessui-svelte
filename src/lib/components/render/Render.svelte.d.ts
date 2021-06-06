@@ -1,7 +1,7 @@
 import { SvelteComponentTyped } from 'svelte'
 
 interface Props extends Record<string, any> {
-  as?: string
+  checked?: boolean
 }
 
-export default class Description extends SvelteComponentTyped<Props> {}
+export default class Render extends SvelteComponentTyped<Props> {}

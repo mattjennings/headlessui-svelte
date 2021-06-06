@@ -22,4 +22,4 @@ export interface LabelContext {
 
 export function getLabelContext(): Writable<LabelContext>
 
-export default class Component extends SvelteComponentTyped<Props, Events, Slots> {}
+export default class LabelProvider extends SvelteComponentTyped<Props, Events, Slots> {}
