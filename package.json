@@ -37,7 +37,6 @@
   },
   "type": "module",
   "dependencies": {
-    "focus-visible": "^5.2.0",
-    "svelte-elements": "^0.4.2"
+    "focus-visible": "^5.2.0"
   }
 }

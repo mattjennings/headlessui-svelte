@@ -3,7 +3,7 @@
 
   export let as
   export let id
-  export let el
+  export let el = undefined
 
   if (!as) {
     throw Error(`"as" is a required prop`)
