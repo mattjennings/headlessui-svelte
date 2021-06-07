@@ -8,7 +8,7 @@ npm install @mattjennings/headlessui-svelte
 
 ## Usage
 
-See [TODO](#TODO) for what components are available.
+See [TODO](#TODO) for which components are available.
 
 The goal is to keep the API as close to `@headlessui/react` as possible.
 
