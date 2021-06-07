@@ -1,6 +1,10 @@
 # headlessui-svelte
 
-Unofficial [Headless UI](https://headlessui.dev) Svelte components
+Unofficial [Headless UI](https://headlessui.dev) Svelte components. Very much a work in progress, use with caution.
+
+```
+npm install @mattjennings/headlessui-svelte
+```
 
 ## Caveats
 
