@@ -76,21 +76,11 @@ Typescript support is partial right now. While headlessui-specific props will be
 
 ### Event forwarding
 
-With React/Vue, events are handled via props and can be forwarded by passing the props along to the child component. In svelte, events have to be explicitly forwarded (pending the [on:\* syntax](https://github.com/sveltejs/svelte/issues/2837)). I have not decided on the solution yet, so components don't have event listeners for the moment.
-
-It may have to mean that internal components manually forward each event type like so:
-
-```svelte
-<!-- Switch.svelte -->
-
-<button {...props} on:click on:mousedown on:mouseup ... />
-```
-
-but perhaps there's a way to convert React/Vue-like `onXYZ` props to event listeners dynamically and workaround this. It's not the Svelte way, but manually typing all events on every component is not ideal.
+Until the [on:\* syntax](https://github.com/sveltejs/svelte/issues/2837) is supported in Svelte, each internal component will need to explicitly forward every possible event so that they can be used. It would be nice to automate this somehow or find some workaround.
 
 ### Dynamic elements
 
-Until [dynamic elements](https://github.com/sveltejs/svelte/issues/2324) are officially supported by svelte, I'm using a modified internal version of [svelte-elements](https://github.com/timhall/svelte-elements) to support the `as` prop.
+Until [dynamic elements](https://github.com/sveltejs/svelte/issues/2324) are supported in Svelte, I'm using a modified internal version of [svelte-elements](https://github.com/timhall/svelte-elements) to support the `as` prop.
 
 ## TODO
 
