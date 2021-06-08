@@ -2,12 +2,15 @@ module.exports = {
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: [
     '@testing-library/jest-dom/extend-expect',
-    'jest-svelte-events/extend-expect'
+    './src/test-utils/custom-matchers.ts'
   ],
   transform: {
     '.+\\.js$': 'babel-jest',
     '.+\\.ts$': 'ts-jest',
     '.+\\.svelte$': ['svelte-jester', { preprocess: true }]
   },
-  moduleFileExtensions: ['js', 'ts', 'svelte']
+  moduleFileExtensions: ['js', 'ts', 'svelte'],
+  moduleNameMapper: {
+    '^src/(.*)$': '<rootDir>/src/$1'
+  }
 }

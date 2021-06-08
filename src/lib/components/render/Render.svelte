@@ -11,6 +11,17 @@
 
 </script>
 
-<svelte:component this={elements[as]} bind:el {id} on:click on:blur on:focus {...$$restProps}>
+<svelte:component
+  this={elements[as]}
+  bind:el
+  {id}
+  on:click
+  on:blur
+  on:focus
+  on:keydown
+  on:keyup
+  on:keypress
+  {...$$restProps}
+>
   <slot />
 </svelte:component>

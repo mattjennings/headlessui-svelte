@@ -5,6 +5,7 @@
   import { getDescriptionContext } from '../description/DescriptionProvider.svelte'
   import { getLabelContext } from '../label/LabelProvider.svelte'
   import { getGroupContext } from './SwitchGroup.svelte'
+  import { useId } from '../../internal/use-id'
 
   let element
 
@@ -13,7 +14,9 @@
   const groupContext = getGroupContext()
   const labelContext = getLabelContext()
   const descriptionContext = getDescriptionContext()
+  const idStore = useId()
 
+  const id = `headlessui-description-${$idStore}`
   // ---
 
   /**
@@ -57,6 +60,7 @@
 </script>
 
 <Render
+  {id}
   as="button"
   bind:el={element}
   role="switch"
