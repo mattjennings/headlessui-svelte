@@ -6,6 +6,7 @@
   import { getLabelContext } from '../label/LabelProvider.svelte'
   import { getGroupContext } from './SwitchGroup.svelte'
   import { useId } from '../../internal/use-id'
+  import { Keys } from '../keyboard'
 
   let element
 
