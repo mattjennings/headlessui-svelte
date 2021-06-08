@@ -7,7 +7,7 @@
   export let as = 'p'
 
   const context = getDescriptionContext()
-  const forwarder = createEventForwarder()
+  const forwardEvent = createEventForwarder()
 
   if (!context) {
     let err = new Error(
@@ -31,6 +31,6 @@
   {...$$restProps}
   on:click={(ev) => {
     $context.props?.onClick(ev)
-    forwarder(ev)
+    forwardEvent('click', ev)
   }}><slot /></Render
 >

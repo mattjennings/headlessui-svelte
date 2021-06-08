@@ -5,10 +5,10 @@ import { get_current_component } from 'svelte/internal'
  */
 export function createEventForwarder() {
   const component = get_current_component()
-  return (type, event) => {
+  return (type: string, event: Event) => {
     const callbacks = component.$$.callbacks[type]
     if (callbacks) {
-      callbacks.slice().forEach((fn) => {
+      callbacks.slice().forEach((fn: (event: Event) => void) => {
         fn.call(component, event)
       })
     }

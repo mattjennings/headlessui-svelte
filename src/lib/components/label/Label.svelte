@@ -8,7 +8,7 @@
   export let passive = false
 
   const context = getLabelContext()
-  const forwarder = createEventForwarder()
+  const forwardEvent = createEventForwarder()
 
   if (!context) {
     let err = new Error('You used a <Label /> component, but it is not inside a relevant parent.')
@@ -32,7 +32,7 @@
     if (!passive) {
       $context.props?.onClick?.(ev)
     }
-    forwarder(ev)
+    forwardEvent('click', ev)
   }}
 >
   <slot />

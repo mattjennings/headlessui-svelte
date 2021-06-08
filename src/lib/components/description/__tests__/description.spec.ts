@@ -1,4 +1,5 @@
 import { render } from '@testing-library/svelte'
+// @ts-ignore
 import whitespace from 'dom-whitespace'
 
 import NoDescription from './NoDescription.test.svelte'
@@ -16,7 +17,7 @@ test('should be possible to use a DescriptionProvider without using a Descriptio
   const { container } = render(NoDescription)
 
   whitespace.remove(window.document)
-  expect(container.firstChild.firstChild).toMatchInlineSnapshot(`
+  expect(container.firstChild?.firstChild).toMatchInlineSnapshot(`
       <div>
         No Description
       </div>
@@ -27,7 +28,7 @@ test('should be possible to use a DescriptionProvider and a single Description, 
   const { container } = render(SingleDescription)
 
   whitespace.remove(window.document)
-  expect(container.firstChild.firstChild).toMatchInlineSnapshot(`
+  expect(container.firstChild?.firstChild).toMatchInlineSnapshot(`
       <div
         aria-describedby="headlessui-description-1"
       >
@@ -47,7 +48,7 @@ test('should be possible to use a DescriptionProvider and multiple Description c
   const { container } = render(MultipleDescriptions)
 
   whitespace.remove(window.document)
-  expect(container.firstChild.firstChild).toMatchInlineSnapshot(`
+  expect(container.firstChild?.firstChild).toMatchInlineSnapshot(`
     <div
       aria-describedby="headlessui-description-1 headlessui-description-2"
     >

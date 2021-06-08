@@ -1,10 +1,12 @@
 module.exports = {
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
+  setupFilesAfterEnv: [
+    '@testing-library/jest-dom/extend-expect',
+    'jest-svelte-events/extend-expect'
+  ],
   transform: {
-    '.+\\.js$': 'babel-jest',
-    '.+\\.svelte$': 'svelte-jester'
+    '.+\\.(js|ts)$': 'ts-jest',
+    '.+\\.svelte$': ['svelte-jester', { preprocess: true }]
   },
-  transformIgnorePatterns: ['node_modules/?!(svelte-elements)'],
-  moduleFileExtensions: ['js', 'svelte']
+  moduleFileExtensions: ['js', 'ts', 'svelte']
 }

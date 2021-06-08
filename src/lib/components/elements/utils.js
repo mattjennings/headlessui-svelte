@@ -1,28 +1,28 @@
 export function subscribe(node, listeners) {
-  let subscriptions = listen(node, listeners);
+  let subscriptions = listen(node, listeners)
 
   return {
     update(listeners) {
-      unsubscribe(subscriptions);
-      subscriptions = listen(node, listeners);
+      unsubscribe(subscriptions)
+      subscriptions = listen(node, listeners)
     },
     destroy() {
-      unsubscribe(subscriptions);
+      unsubscribe(subscriptions)
     }
-  };
+  }
 }
 
 function listen(node, listeners) {
-  if (!listeners) return [];
+  if (!listeners) return []
 
-  return Object.keys(listeners).map(event => {
-    const handler = listeners[event];
+  return Object.keys(listeners).map((event) => {
+    const handler = listeners[event]
 
-    node.addEventListener(event, handler);
-    return () => node.removeEventListener(event, handler);
-  });
+    node.addEventListener(event, handler)
+    return () => node.removeEventListener(event, handler)
+  })
 }
 
 function unsubscribe(subscriptions) {
-  return subscriptions.forEach(unsubscribe => unsubscribe());
+  return subscriptions.forEach((unsubscribe) => unsubscribe())
 }

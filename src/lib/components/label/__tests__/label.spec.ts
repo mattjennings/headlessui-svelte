@@ -1,4 +1,5 @@
 import { render } from '@testing-library/svelte'
+// @ts-ignore
 import whitespace from 'dom-whitespace'
 import NoLabel from './NoLabel.test.svelte'
 import SingleLabel from './SingleLabel.test.svelte'
@@ -14,7 +15,7 @@ jest.mock('../../elements')
 test('should be possible to use a LabelProvider without using a Label', () => {
   const { container } = render(NoLabel)
 
-  expect(container.firstChild.firstChild).toMatchInlineSnapshot(`
+  expect(container.firstChild?.firstChild).toMatchInlineSnapshot(`
       <div>
         No Label
       </div>
@@ -25,7 +26,7 @@ test('should be possible to use a LabelProvider and a single Label, and have the
   const { container } = render(SingleLabel)
 
   whitespace.remove(window.document)
-  expect(container.firstChild.firstChild).toMatchInlineSnapshot(`
+  expect(container.firstChild?.firstChild).toMatchInlineSnapshot(`
       <div
         aria-labelledby="headlessui-label-1"
       >
@@ -45,7 +46,7 @@ test('should be possible to use a LabelProvider and multiple Label components, a
   const { container } = render(MultipleLabels)
 
   whitespace.remove(window.document)
-  expect(container.firstChild.firstChild).toMatchInlineSnapshot(`
+  expect(container.firstChild?.firstChild).toMatchInlineSnapshot(`
     <div
       aria-labelledby="headlessui-label-1 headlessui-label-2"
     >
