@@ -1,7 +1,7 @@
 import 'jest-svelte-events/extend-expect'
 import { render } from '@testing-library/svelte'
-
-import { type, shift, Keys } from './interactions'
+import Interactions from './Interactions.test.svelte'
+import { type, shift, Keys } from '../interactions'
 
 type Events = 'onKeyDown' | 'onKeyUp' | 'onKeyPress' | 'onClick' | 'onBlur' | 'onFocus'
 let events: Events[] = ['onKeyDown', 'onKeyUp', 'onKeyPress', 'onClick', 'onBlur', 'onFocus']
@@ -147,27 +147,18 @@ describe('Keyboard', () => {
 
       let state = { readyToCapture: false }
 
-      function createProps(id: string) {
-        return events.reduce(
-          (props: React.ComponentProps<'button'>, name) => {
-            props[name] = (event: any) => {
-              if (!state.readyToCapture) return
-              if (prevents.has(name)) event.preventDefault()
-              fired.push(event.nativeEvent)
-            }
-            return props
-          },
-          { id }
-        )
+      function createProps() {
+        return events.reduce((props: any, name) => {
+          props[name] = (event: any) => {
+            if (!state.readyToCapture) return
+            if (prevents.has(name)) event.preventDefault()
+            fired.push(event)
+          }
+          return props
+        }, {})
       }
 
-      render(
-        <>
-          <button {...createProps('before')}>Before</button>
-          <button {...createProps('trigger')}>Trigger</button>
-          <button {...createProps('after')}>After</button>
-        </>
-      )
+      render(Interactions, createProps())
 
       let trigger = document.getElementById('trigger')
       trigger?.focus()
@@ -177,7 +168,7 @@ describe('Keyboard', () => {
 
       let expected = result.map((e) => event(e))
 
-      expect(fired.length).toHaveFire.toEqual(result.length)
+      expect(fired.length).toEqual(result.length)
 
       for (let [idx, event] of fired.entries()) {
         for (let key in expected[idx]) {

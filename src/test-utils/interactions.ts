@@ -1,4 +1,4 @@
-import { fireEvent } from '@testing-library/react'
+import { fireEvent } from '@testing-library/svelte'
 
 function nextFrame(cb: Function): void {
   setImmediate(() =>
@@ -25,7 +25,7 @@ export let Keys: Record<string, Partial<KeyboardEvent>> = {
   PageUp: { key: 'PageUp', keyCode: 33 },
   PageDown: { key: 'PageDown', keyCode: 34 },
 
-  Tab: { key: 'Tab', keyCode: 9, charCode: 9 },
+  Tab: { key: 'Tab', keyCode: 9, charCode: 9 }
 }
 
 export function shift(event: Partial<KeyboardEvent>) {
@@ -33,7 +33,7 @@ export function shift(event: Partial<KeyboardEvent>) {
 }
 
 export function word(input: string): Partial<KeyboardEvent>[] {
-  return input.split('').map(key => ({ key }))
+  return input.split('').map((key) => ({ key }))
 }
 
 let Default = Symbol()
@@ -43,23 +43,23 @@ let cancellations: Record<string | typeof Default, Record<string, Set<string>>> 
   [Default]: {
     keydown: new Set(['keypress']),
     keypress: new Set([]),
-    keyup: new Set([]),
+    keyup: new Set([])
   },
   [Keys.Enter.key!]: {
     keydown: new Set(['keypress', 'click']),
     keypress: new Set(['click']),
-    keyup: new Set([]),
+    keyup: new Set([])
   },
   [Keys.Space.key!]: {
     keydown: new Set(['keypress', 'click']),
     keypress: new Set([]),
-    keyup: new Set(['click']),
+    keyup: new Set(['click'])
   },
   [Keys.Tab.key!]: {
     keydown: new Set(['keypress', 'blur', 'focus']),
     keypress: new Set([]),
-    keyup: new Set([]),
-  },
+    keyup: new Set([])
+  }
 }
 
 let order: Record<
@@ -67,7 +67,7 @@ let order: Record<
   ((
     element: Element,
     event: Partial<KeyboardEvent | MouseEvent>
-  ) => boolean | typeof Ignore | Element)[]
+  ) => Promise<boolean | typeof Ignore> | Element)[]
 > = {
   [Default]: [
     function keydown(element, event) {
@@ -78,7 +78,7 @@ let order: Record<
     },
     function keyup(element, event) {
       return fireEvent.keyUp(element, event)
-    },
+    }
   ],
   [Keys.Enter.key!]: [
     function keydown(element, event) {
@@ -87,13 +87,13 @@ let order: Record<
     function keypress(element, event) {
       return fireEvent.keyPress(element, event)
     },
-    function click(element, event) {
+    async function click(element, event) {
       if (element instanceof HTMLButtonElement) return fireEvent.click(element, event)
       return Ignore
     },
     function keyup(element, event) {
       return fireEvent.keyUp(element, event)
-    },
+    }
   ],
   [Keys.Space.key!]: [
     function keydown(element, event) {
@@ -105,10 +105,10 @@ let order: Record<
     function keyup(element, event) {
       return fireEvent.keyUp(element, event)
     },
-    function click(element, event) {
+    async function click(element, event) {
       if (element instanceof HTMLButtonElement) return fireEvent.click(element, event)
       return Ignore
-    },
+    }
   ],
   [Keys.Tab.key!]: [
     function keydown(element, event) {
@@ -119,8 +119,8 @@ let order: Record<
     },
     function keyup(element, event) {
       return fireEvent.keyUp(element, event)
-    },
-  ],
+    }
+  ]
 }
 
 export async function type(events: Partial<KeyboardEvent>[], element = document.activeElement) {
@@ -134,12 +134,12 @@ export async function type(events: Partial<KeyboardEvent>[], element = document.
       let actions = order[event.key!] ?? order[Default as any]
       for (let action of actions) {
         let checks = action.name.split('And')
-        if (checks.some(check => skip.has(check))) continue
+        if (checks.some((check) => skip.has(check))) continue
 
-        let result = action(element, {
+        let result: boolean | typeof Ignore | Element = await action(element, {
           type: action.name,
           charCode: event.key?.length === 1 ? event.key?.charCodeAt(0) : undefined,
-          ...event,
+          ...event
         })
         if (result === Ignore) continue
         if (result instanceof Element) {
@@ -174,11 +174,11 @@ export async function press(event: Partial<KeyboardEvent>, element = document.ac
 
 export enum MouseButton {
   Left = 0,
-  Right = 2,
+  Right = 2
 }
 
 export async function click(
-  element: Document | Element | Window | Node | null,
+  element: Document | Element | Window | null,
   button = MouseButton.Left
 ) {
   try {
@@ -229,7 +229,7 @@ export async function click(
   }
 }
 
-export async function focus(element: Document | Element | Window | Node | null) {
+export async function focus(element: Document | Element | Window | null) {
   try {
     if (element === null) return expect(element).not.toBe(null)
 
@@ -317,15 +317,15 @@ let focusableSelector = [
   'iframe',
   'input:not([disabled])',
   'select:not([disabled])',
-  'textarea:not([disabled])',
+  'textarea:not([disabled])'
 ]
   .map(
     process.env.NODE_ENV === 'test'
       ? // TODO: Remove this once JSDOM fixes the issue where an element that is
         // "hidden" can be the document.activeElement, because this is not possible
         // in real browsers.
-        selector => `${selector}:not([tabindex='-1']):not([style*='display: none'])`
-      : selector => `${selector}:not([tabindex='-1'])`
+        (selector) => `${selector}:not([tabindex='-1']):not([style*='display: none'])`
+      : (selector) => `${selector}:not([tabindex='-1'])`
   )
   .join(',')
 

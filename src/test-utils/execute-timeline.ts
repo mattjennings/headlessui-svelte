@@ -1,7 +1,7 @@
 import snapshotDiff from 'snapshot-diff'
 import { render } from '@testing-library/react'
 
-import { disposables } from '../utils/disposables'
+import { disposables } from '../lib/utils/disposables'
 import { reportChanges } from './report-dom-node-changes'
 
 function redentSnapshot(input: string) {
@@ -17,7 +17,7 @@ function redentSnapshot(input: string) {
 
   return input
     .split('\n')
-    .map(line =>
+    .map((line) =>
       line.trim() === '---' ? line : line.replace(replacer, (_, sign, rest) => `${sign}  ${rest}`)
     )
     .join('\n')
@@ -41,7 +41,7 @@ export async function executeTimeline(
         // This will ensure that any DOM change to the body has been recorded.
         snapshots.push({
           content: tools.asFragment(),
-          recordedAt: process.hrtime.bigint(),
+          recordedAt: process.hrtime.bigint()
         })
       }
     )
@@ -69,13 +69,13 @@ export async function executeTimeline(
       .reduce((total, current) => total + current, 0)
 
     // Changes happen in the next frame
-    await new Promise(resolve => d.nextFrame(resolve))
+    await new Promise((resolve) => d.nextFrame(resolve))
 
     // We wait for the amount of the duration
-    await new Promise(resolve => d.setTimeout(resolve, totalDuration))
+    await new Promise((resolve) => d.setTimeout(resolve, totalDuration))
 
     // We wait an additional next frame so that we know that we are done
-    await new Promise(resolve => d.nextFrame(resolve))
+    await new Promise((resolve) => d.nextFrame(resolve))
   }, Promise.resolve())
 
   if (snapshots.length <= 0) {
@@ -95,7 +95,7 @@ export async function executeTimeline(
     .map((snapshot, i, all) => ({
       ...snapshot,
       relativeToPreviousSnapshot:
-        i === 0 ? 0 : Number((snapshot.recordedAt - all[i - 1].recordedAt) / BigInt(1e6)),
+        i === 0 ? 0 : Number((snapshot.recordedAt - all[i - 1].recordedAt) / BigInt(1e6))
     }))
 
   let diffed = uniqueSnapshots
@@ -118,7 +118,7 @@ export async function executeTimeline(
         snapshotDiff(uniqueSnapshots[i - 1].content, call.content, {
           aAnnotation: '__REMOVE_ME__',
           bAnnotation: '__REMOVE_ME__',
-          contextLines: 0,
+          contextLines: 0
         })
           // Just to do some cleanup
           .replace(/\n\n@@([^@@]*)@@/g, '') // Top level @@ signs
@@ -127,7 +127,7 @@ export async function executeTimeline(
           .replace(/Snapshot Diff:\n/g, '')
       )
         .split('\n')
-        .map(line => `    ${line}`)
+        .map((line) => `    ${line}`)
         .join('\n')}`
     })
     .filter(Boolean)
@@ -147,7 +147,7 @@ executeTimeline.fullTransition = (duration: number) => {
     null,
 
     /** Stage 3: After duration remove `to` and `base` classes */
-    duration,
+    duration
   ]
 }
 
@@ -158,7 +158,7 @@ let state: {
 } = {
   before: Date.now(),
   fps: 0,
-  handle: null,
+  handle: null
 }
 
 state.handle = requestAnimationFrame(function loop() {

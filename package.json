@@ -8,7 +8,7 @@
     "preview": "svelte-kit preview",
     "lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "prettier --write --plugin-search-dir=. .",
-    "test": "jest src/lib",
+    "test": "jest",
     "test:watch": "npm run test -- --watch",
     "release": "npm run package && npm publish ./package --access public"
   },
@@ -26,8 +26,7 @@
     "eslint": "^7.28.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-svelte3": "^3.2.0",
-    "jest": "^27.0.4",
-    "jest-serializer-html": "^7.0.0",
+    "jest": "^25.5.4",
     "jest-svelte-events": "^1.0.5",
     "postcss": "^8.3.0",
     "postcss-focus-visible": "^5.0.0",
@@ -38,13 +37,11 @@
     "svelte-jester": "^1.7.0",
     "svelte-preprocess": "^4.7.3",
     "tailwindcss": "^2.1.4",
-    "ts-jest": "^27.0.3"
-  },
-  "type": "module",
-  "dependencies": {
+    "ts-jest": "^25.5.1",
     "focus-visible": "^5.2.0",
     "typescript": "^4.3.2"
   },
+  "type": "module",
   "pnpm": {
     "overrides": {
       "@sveltejs/kit": "link:../kit/packages/kit"

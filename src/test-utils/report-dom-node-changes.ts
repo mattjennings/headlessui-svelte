@@ -1,4 +1,4 @@
-import { disposables } from '../utils/disposables'
+import { disposables } from '../lib/utils/disposables'
 
 export function reportChanges<TType>(key: () => TType, onChange: (value: TType) => void) {
   let d = disposables()

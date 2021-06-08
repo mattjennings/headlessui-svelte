@@ -1,4 +1,4 @@
-import { isFocusableElement, FocusableMode } from '../utils/focus-management'
+import { isFocusableElement, FocusableMode } from '../lib/utils/focus-management'
 
 function assertNever(x: never): never {
   throw new Error('Unexpected object: ' + x)
@@ -36,7 +36,7 @@ export enum MenuState {
   InvisibleHidden,
 
   /** The menu is **not** visible to the user. It's not in the DOM, it is unmounted. */
-  InvisibleUnmounted,
+  InvisibleUnmounted
 }
 
 export function assertMenuButton(
@@ -247,7 +247,7 @@ export enum ListboxState {
   InvisibleHidden,
 
   /** The listbox is **not** visible to the user. It's not in the DOM, it is unmounted. */
-  InvisibleUnmounted,
+  InvisibleUnmounted
 }
 
 export function assertListbox(
@@ -528,7 +528,7 @@ export function getSwitchLabel(): HTMLElement | null {
 
 export enum SwitchState {
   On,
-  Off,
+  Off
 }
 
 export function assertSwitch(
@@ -601,7 +601,7 @@ export enum DisclosureState {
   InvisibleHidden,
 
   /** The disclosure is **not** visible to the user. It's not in the DOM, it is unmounted. */
-  InvisibleUnmounted,
+  InvisibleUnmounted
 }
 
 // ---
@@ -725,7 +725,7 @@ export enum PopoverState {
   InvisibleHidden,
 
   /** The popover is **not** visible to the user. It's not in the DOM, it is unmounted. */
-  InvisibleUnmounted,
+  InvisibleUnmounted
 }
 
 // ---
@@ -832,7 +832,7 @@ export function assertLabelValue(element: HTMLElement | null, value: string) {
 
   if (element.hasAttribute('aria-labelledby')) {
     let ids = element.getAttribute('aria-labelledby')!.split(' ')
-    expect(ids.map(id => document.getElementById(id)?.textContent).join(' ')).toEqual(value)
+    expect(ids.map((id) => document.getElementById(id)?.textContent).join(' ')).toEqual(value)
     return
   }
 
@@ -894,7 +894,7 @@ export enum DialogState {
   InvisibleHidden,
 
   /** The dialog is **not** visible to the user. It's not in the DOM, it is unmounted. */
-  InvisibleUnmounted,
+  InvisibleUnmounted
 }
 
 // ---
@@ -1240,7 +1240,7 @@ export function getByText(text: string): HTMLElement | null {
     acceptNode(node: HTMLElement) {
       if (node.children.length > 0) return NodeFilter.FILTER_SKIP
       return NodeFilter.FILTER_ACCEPT
-    },
+    }
   })
 
   while (walker.nextNode()) {

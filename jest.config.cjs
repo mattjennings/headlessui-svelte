@@ -5,7 +5,8 @@ module.exports = {
     'jest-svelte-events/extend-expect'
   ],
   transform: {
-    '.+\\.(js|ts)$': 'ts-jest',
+    '.+\\.js$': 'babel-jest',
+    '.+\\.ts$': 'ts-jest',
     '.+\\.svelte$': ['svelte-jester', { preprocess: true }]
   },
   moduleFileExtensions: ['js', 'ts', 'svelte']
