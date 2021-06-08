@@ -8,7 +8,7 @@ function nextFrame(cb: Function): void {
   )
 }
 
-export let Keys: Record<string, Partial<KeyboardEvent>> = {
+export const Keys: Record<string, Partial<KeyboardEvent>> = {
   Space: { key: ' ', keyCode: 32, charCode: 32 },
   Enter: { key: 'Enter', keyCode: 13, charCode: 13 },
   Escape: { key: 'Escape', keyCode: 27, charCode: 27 },
@@ -36,10 +36,10 @@ export function word(input: string): Partial<KeyboardEvent>[] {
   return input.split('').map((key) => ({ key }))
 }
 
-let Default = Symbol()
-let Ignore = Symbol()
+const Default = Symbol()
+const Ignore = Symbol()
 
-let cancellations: Record<string | typeof Default, Record<string, Set<string>>> = {
+const cancellations: Record<string | typeof Default, Record<string, Set<string>>> = {
   [Default]: {
     keydown: new Set(['keypress']),
     keypress: new Set([]),
@@ -62,7 +62,7 @@ let cancellations: Record<string | typeof Default, Record<string, Set<string>>> 
   }
 }
 
-let order: Record<
+const order: Record<
   string | typeof Default,
   ((
     element: Element,
@@ -129,14 +129,14 @@ export async function type(events: Partial<KeyboardEvent>[], element = document.
   try {
     if (element === null) return expect(element).not.toBe(null)
 
-    for (let event of events) {
-      let skip = new Set()
-      let actions = order[event.key!] ?? order[Default as any]
-      for (let action of actions) {
-        let checks = action.name.split('And')
+    for (const event of events) {
+      const skip = new Set()
+      const actions = order[event.key!] ?? order[Default as any]
+      for (const action of actions) {
+        const checks = action.name.split('And')
         if (checks.some((check) => skip.has(check))) continue
 
-        let result: boolean | typeof Ignore | Element = await action(element, {
+        const result: boolean | typeof Ignore | Element = await action(element, {
           type: action.name,
           charCode: event.key?.length === 1 ? event.key?.charCodeAt(0) : undefined,
           ...event
@@ -146,12 +146,12 @@ export async function type(events: Partial<KeyboardEvent>[], element = document.
           element = result
         }
 
-        let cancelled = !result
+        const cancelled = !result
         if (cancelled) {
-          let skippablesForKey = cancellations[event.key!] ?? cancellations[Default as any]
-          let skippables = skippablesForKey?.[action.name] ?? new Set()
+          const skippablesForKey = cancellations[event.key!] ?? cancellations[Default as any]
+          const skippables = skippablesForKey?.[action.name] ?? new Set()
 
-          for (let skippable of skippables) skip.add(skippable)
+          for (const skippable of skippables) skip.add(skippable)
         }
       }
     }
@@ -184,11 +184,11 @@ export async function click(
   try {
     if (element === null) return expect(element).not.toBe(null)
 
-    let options = { button }
+    const options = { button }
 
     if (button === MouseButton.Left) {
       // Cancel in pointerDown cancels mouseDown, mouseUp
-      let cancelled = !fireEvent.pointerDown(element, options)
+      const cancelled = !fireEvent.pointerDown(element, options)
       if (!cancelled) {
         fireEvent.mouseDown(element, options)
       }
@@ -210,7 +210,7 @@ export async function click(
       fireEvent.click(element, options)
     } else if (button === MouseButton.Right) {
       // Cancel in pointerDown cancels mouseDown, mouseUp
-      let cancelled = !fireEvent.pointerDown(element, options)
+      const cancelled = !fireEvent.pointerDown(element, options)
       if (!cancelled) {
         fireEvent.mouseDown(element, options)
       }
@@ -289,13 +289,13 @@ export async function mouseLeave(element: Document | Element | Window | null) {
 // ---
 
 function focusNext(event: Partial<KeyboardEvent>) {
-  let direction = event.shiftKey ? -1 : +1
-  let focusableElements = getFocusableElements()
-  let total = focusableElements.length
+  const direction = event.shiftKey ? -1 : +1
+  const focusableElements = getFocusableElements()
+  const total = focusableElements.length
 
   function innerFocusNext(offset = 0): Element {
-    let currentIdx = focusableElements.indexOf(document.activeElement as HTMLElement)
-    let next = focusableElements[(currentIdx + total + direction + offset) % total] as HTMLElement
+    const currentIdx = focusableElements.indexOf(document.activeElement as HTMLElement)
+    const next = focusableElements[(currentIdx + total + direction + offset) % total] as HTMLElement
 
     if (next) next?.focus({ preventScroll: true })
 
@@ -308,7 +308,7 @@ function focusNext(event: Partial<KeyboardEvent>) {
 
 // Credit:
 //  - https://stackoverflow.com/a/30753870
-let focusableSelector = [
+const focusableSelector = [
   '[contentEditable=true]',
   '[tabindex]',
   'a[href]',

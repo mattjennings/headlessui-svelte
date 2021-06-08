@@ -1,8 +1,11 @@
-export function subscribe(node, listeners) {
+type Listener = () => void
+type Listeners = Record<string, Listener>
+
+export function subscribe(node: HTMLElement, listeners: Listeners) {
   let subscriptions = listen(node, listeners)
 
   return {
-    update(listeners) {
+    update(listeners: Listeners) {
       unsubscribe(subscriptions)
       subscriptions = listen(node, listeners)
     },
@@ -12,7 +15,7 @@ export function subscribe(node, listeners) {
   }
 }
 
-function listen(node, listeners) {
+function listen(node: HTMLElement, listeners: Listeners) {
   if (!listeners) return []
 
   return Object.keys(listeners).map((event) => {
@@ -23,6 +26,6 @@ function listen(node, listeners) {
   })
 }
 
-function unsubscribe(subscriptions) {
+function unsubscribe(subscriptions: Listener[]) {
   return subscriptions.forEach((unsubscribe) => unsubscribe())
 }

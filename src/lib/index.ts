@@ -1,1 +1,1 @@
-export { Switch } from './components/switch'
+export { default as Switch } from './components/switch/Switch.svelte'

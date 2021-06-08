@@ -4,7 +4,7 @@ import Interactions from './Interactions.test.svelte'
 import { type, shift, Keys } from '../interactions'
 
 type Events = 'onKeyDown' | 'onKeyUp' | 'onKeyPress' | 'onClick' | 'onBlur' | 'onFocus'
-let events: Events[] = ['onKeyDown', 'onKeyUp', 'onKeyPress', 'onClick', 'onBlur', 'onFocus']
+const events: Events[] = ['onKeyDown', 'onKeyUp', 'onKeyPress', 'onClick', 'onBlur', 'onFocus']
 
 type Args = [
   string | Partial<KeyboardEvent>,
@@ -21,7 +21,7 @@ function event(
   input: string | Partial<KeyboardEvent | MouseEvent>,
   target?: string
 ): Partial<KeyboardEvent | MouseEvent> {
-  let e = typeof input === 'string' ? { type: input } : input
+  const e = typeof input === 'string' ? { type: input } : input
 
   if (target) {
     Object.defineProperty(e, 'target', {
@@ -143,9 +143,9 @@ describe('Keyboard', () => {
         new Set<Events>(['onBlur'])
       ]
     ])('should fire the correct events %#', async (input, result, prevents) => {
-      let fired: (KeyboardEvent | MouseEvent)[] = []
+      const fired: (KeyboardEvent | MouseEvent)[] = []
 
-      let state = { readyToCapture: false }
+      const state = { readyToCapture: false }
 
       function createProps() {
         return events.reduce((props: any, name) => {
@@ -160,19 +160,19 @@ describe('Keyboard', () => {
 
       render(Interactions, createProps())
 
-      let trigger = document.getElementById('trigger')
+      const trigger = document.getElementById('trigger')
       trigger?.focus()
       state.readyToCapture = true
 
       await type([key(input)])
 
-      let expected = result.map((e) => event(e))
+      const expected = result.map((e) => event(e))
 
       expect(fired.length).toEqual(result.length)
 
-      for (let [idx, event] of fired.entries()) {
-        for (let key in expected[idx]) {
-          let _key = key as keyof (KeyboardEvent | MouseEvent)
+      for (const [idx, event] of fired.entries()) {
+        for (const key in expected[idx]) {
+          const _key = key as keyof (KeyboardEvent | MouseEvent)
           expect(event[_key]).toBe(expected[idx][_key])
         }
       }
