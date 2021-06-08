@@ -10,6 +10,7 @@
 <div class="mt-4 grid gap-4 grid-cols-1 sm:grid-cols-4">
   <Container title="Basic">
     <Switch
+      as="button"
       bind:checked={enabled}
       class={`${enabled ? 'bg-teal-900' : 'bg-teal-700'}
       relative inline-flex flex-shrink-0 h-[38px] w-[74px] border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}

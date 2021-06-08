@@ -16,11 +16,11 @@
   bind:el
   {id}
   on:click
-  on:blur
   on:focus
+  on:blur
+  on:keypress
   on:keydown
   on:keyup
-  on:keypress
   {...$$restProps}
 >
   <slot />

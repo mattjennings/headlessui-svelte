@@ -6,6 +6,16 @@
 
 </script>
 
-<p bind:this={el} on:focus on:blur on:keypress on:click use:subscribe={listen} {...$$restProps}>
+<p
+  bind:this={el}
+  on:click
+  on:focus
+  on:blur
+  on:keypress
+  on:keydown
+  on:keyup
+  use:subscribe={listen}
+  {...$$restProps}
+>
   <slot />
 </p>

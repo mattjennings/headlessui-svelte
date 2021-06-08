@@ -71,6 +71,9 @@
   on:click={handleClick}
   on:keyup={handleKeyUp}
   on:keypress={handleKeyPress}
+  on:keydown
+  on:focus
+  on:blur
   {...$$restProps}
 >
   <slot />

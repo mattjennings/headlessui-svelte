@@ -10,10 +10,12 @@
 <a
   {href}
   bind:this={el}
+  on:click
   on:focus
   on:blur
   on:keypress
-  on:click
+  on:keydown
+  on:keyup
   use:subscribe={listen}
   {...$$restProps}
 >

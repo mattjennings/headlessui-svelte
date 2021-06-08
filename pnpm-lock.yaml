@@ -4,14 +4,12 @@ overrides:
   '@sveltejs/kit': link:../kit/packages/kit
 
 specifiers:
-  '-': ^0.0.1
   '@babel/preset-env': ^7.14.4
   '@sveltejs/kit': link:../kit/packages/kit
   '@testing-library/jest-dom': ^5.13.0
   '@testing-library/svelte': ^3.0.3
   '@typescript-eslint/eslint-plugin': ^4.26.0
   '@typescript-eslint/parser': ^4.26.0
-  D: ^1.0.0
   autoprefixer: ^10.2.6
   babel-jest: ^27.0.2
   cssnano: ^5.0.5
@@ -27,20 +25,16 @@ specifiers:
   postcss-load-config: ^3.0.1
   prettier: ^2.3.1
   prettier-plugin-svelte: ^2.3.0
-  setimmediate: ^1.0.5
   svelte: ^3.38.2
   svelte-jester: ^1.7.0
   svelte-preprocess: ^4.7.3
+  svelte2tsx: ^0.2.0
   tailwindcss: ^2.1.4
   ts-jest: ^25.5.1
   typescript: ^4.3.2
 
 dependencies:
-  '-': 0.0.1
-  D: 1.0.0
-  focus-visible: 5.2.0
-  setimmediate: 1.0.5
-  typescript: 4.3.2
+  svelte2tsx: 0.2.0_svelte@3.38.2+typescript@4.3.2
 
 devDependencies:
   '@babel/preset-env': 7.14.4
@@ -56,6 +50,7 @@ devDependencies:
   eslint: 7.28.0
   eslint-config-prettier: 8.3.0_eslint@7.28.0
   eslint-plugin-svelte3: 3.2.0_eslint@7.28.0+svelte@3.38.2
+  focus-visible: 5.2.0
   jest: 25.5.4
   jest-svelte-events: 1.0.5_svelte@3.38.2
   postcss: 8.3.0
@@ -68,12 +63,9 @@ devDependencies:
   svelte-preprocess: 4.7.3_ddfd8490a44ef0de606159ff3aef985a
   tailwindcss: 2.1.4_6daa0ece57b4377652e73c9c66c3b94c
   ts-jest: 25.5.1_jest@25.5.4+typescript@4.3.2
+  typescript: 4.3.2
 
 packages:
-
-  /-/0.0.1:
-    resolution: {integrity: sha512-3HfneK3DGAm05fpyj20sT3apkNcvPpCuccOThOPdzz8sY7GgQGe0l93XH9bt+YzibcTIgUAIMoyVJI740RtgyQ==}
-    dev: false
 
   /@babel/code-frame/7.12.11:
     resolution: {integrity: sha512-Zt1yodBx1UcyiePMSkWnU4hPqhwq7hGi2nFL1LeA3EUl+q2LQx16MISgJ0+z7dnmgvP9QtIleuETGOiOH1RcIw==}
@@ -1749,11 +1741,6 @@ packages:
       eslint-visitor-keys: 2.1.0
     dev: true
 
-  /D/1.0.0:
-    resolution: {integrity: sha512-nQvrCBu7K2pSSEtIM0EEF03FVjcczCXInMt3moLNFbjlWx6bZrX72uT6/1uAXDbnzGUAx9gTyDiQ+vrFi663oA==}
-    deprecated: Package no longer supported. Contact support@npmjs.com for more info.
-    dev: false
-
   /abab/2.0.5:
     resolution: {integrity: sha512-9IK9EadsbHo6jLWIpxpR6pL0sazTXV6+SQv25ZB+F7Bj9mJNaOc4nCRabwd5M/JwmUa8idz6Eci6eKfJryPs6Q==}
     dev: true
@@ -2714,6 +2701,10 @@ packages:
     engines: {node: '>=0.10'}
     dev: true
 
+  /dedent-js/1.0.1:
+    resolution: {integrity: sha1-vuX7fJ5yfYXf+iRZDRDsGrElUwU=}
+    dev: false
+
   /deep-is/0.1.3:
     resolution: {integrity: sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=}
     dev: true
@@ -3255,7 +3246,7 @@ packages:
 
   /focus-visible/5.2.0:
     resolution: {integrity: sha512-Rwix9pBtC1Nuy5wysTmKy+UjbDJpIfg8eHjw0rjZ1mX4GNLz1Bmd16uDpI3Gk1i70Fgcs8Csg2lPm8HULFg9DQ==}
-    dev: false
+    dev: true
 
   /for-in/1.0.2:
     resolution: {integrity: sha1-gQaNKVqBQuwKxybG4iAMMPttXoA=}
@@ -4602,6 +4593,12 @@ packages:
       '@sinonjs/commons': 1.8.3
     dev: true
 
+  /lower-case/2.0.2:
+    resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
+    dependencies:
+      tslib: 2.2.0
+    dev: false
+
   /lru-cache/6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
     engines: {node: '>=10'}
@@ -4773,6 +4770,13 @@ packages:
   /nice-try/1.0.5:
     resolution: {integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==}
     dev: true
+
+  /no-case/3.0.4:
+    resolution: {integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==}
+    dependencies:
+      lower-case: 2.0.2
+      tslib: 2.2.0
+    dev: false
 
   /node-emoji/1.10.0:
     resolution: {integrity: sha512-Yt3384If5H6BYGVHiHwTL+99OzJKHhgp82S8/dktEK73T26BazdgZ4JZh92xSVtGNJvz9UbXdNAc5hcrXV42vw==}
@@ -5012,6 +5016,13 @@ packages:
   /parse5/5.1.0:
     resolution: {integrity: sha512-fxNG2sQjHvlVAYmzBZS9YlDp6PTSSDwa98vkD4QgVDDCAo84z5X1t5XyJQ62ImdLXx5NdIIfihey6xpum9/gRQ==}
     dev: true
+
+  /pascal-case/3.1.2:
+    resolution: {integrity: sha512-uWlGT3YSnK9x3BQJaOdcZwrnV6hPpd8jFH1/ucpiLRPh/2zCVJKS19E4GvYHvaCcACn3foXZ0cLB9Wrx1KGe5g==}
+    dependencies:
+      no-case: 3.0.4
+      tslib: 2.2.0
+    dev: false
 
   /pascalcase/0.1.1:
     resolution: {integrity: sha1-s2PlXoAGym/iF4TS2yK9FdeRfxQ=}
@@ -5897,10 +5908,6 @@ packages:
       split-string: 3.1.0
     dev: true
 
-  /setimmediate/1.0.5:
-    resolution: {integrity: sha1-KQy7Iy4waULX1+qbg3Mqt4VvgoU=}
-    dev: false
-
   /shebang-command/1.2.0:
     resolution: {integrity: sha1-RKrGW2lbAzmJaMOfNj/uXer98eo=}
     engines: {node: '>=0.10.0'}
@@ -6281,6 +6288,18 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
+  /svelte2tsx/0.2.0_svelte@3.38.2+typescript@4.3.2:
+    resolution: {integrity: sha512-gag/5eqXOMfeHkPWbioEz2kk01KJpG2ZVxYMV35EWMGpxR4m6jzgNPkl7bYp5fEOuHQ99muyVQFIedu4wjgmZw==}
+    peerDependencies:
+      svelte: ^3.24
+      typescript: ^4.1.2
+    dependencies:
+      dedent-js: 1.0.1
+      pascal-case: 3.1.2
+      svelte: 3.38.2
+      typescript: 4.3.2
+    dev: false
+
   /svgo/2.3.0:
     resolution: {integrity: sha512-fz4IKjNO6HDPgIQxu4IxwtubtbSfGEAJUq/IXyTPIkGhWck/faiiwfkvsB8LnBkKLvSoyNNIY6d13lZprJMc9Q==}
     engines: {node: '>=10.13.0'}
@@ -6469,6 +6488,10 @@ packages:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
 
+  /tslib/2.2.0:
+    resolution: {integrity: sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==}
+    dev: false
+
   /tsutils/3.21.0_typescript@4.3.2:
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
     engines: {node: '>= 6'}
@@ -6538,7 +6561,7 @@ packages:
     resolution: {integrity: sha512-zZ4hShnmnoVnAHpVHWpTcxdv7dWP60S2FsydQLV8V5PbS3FifjWFFRiHSWpDJahly88PRyV5teTSLoq4eG7mKw==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: false
+    dev: true
 
   /unicode-canonical-property-names-ecmascript/1.0.4:
     resolution: {integrity: sha512-jDrNnXWHd4oHiTZnx/ZG7gtUTVp+gCcTTKr8L0HjlwphROEW3+Him+IpvC+xcJEFegapiMZyZe02CyuOnRmbnQ==}

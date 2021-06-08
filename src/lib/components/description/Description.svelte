@@ -28,6 +28,12 @@
 <Render
   {as}
   {id}
+  on:click
+  on:focus
+  on:blur
+  on:keypress
+  on:keydown
+  on:keyup
   {...$$restProps}
   on:click={(ev) => {
     $context.props?.onClick(ev)

@@ -27,6 +27,12 @@
 <Render
   {id}
   {as}
+  on:click
+  on:focus
+  on:blur
+  on:keypress
+  on:keydown
+  on:keyup
   {...$$restProps}
   on:click={(ev) => {
     if (!passive) {

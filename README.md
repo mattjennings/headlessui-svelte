@@ -8,7 +8,7 @@ npm install @mattjennings/headlessui-svelte
 
 ## Usage
 
-See [TODO](#TODO) for which components are available.
+See [Components](#Components) for which are available.
 
 The goal is to keep the API as close to `@headlessui/react` as possible.
 
@@ -68,23 +68,28 @@ export default function CustomLabelExample() {
 }
 ```
 
-## Typescript
-
-Typescript support is partial right now. While headlessui-specific props will be typed, they won't have types for inherited HTML attributes or events. I would like to use an existing types package to do those, but I haven't found one for Svelte yet.
-
 ## Caveats
 
 ### Event forwarding
 
-Until the [on:\* syntax](https://github.com/sveltejs/svelte/issues/2837) is supported in Svelte, each internal component will need to explicitly forward every possible event so that they can be used. It would be nice to automate this somehow or find some workaround.
+Until the [on:\* syntax](https://github.com/sveltejs/svelte/issues/2837) is supported in Svelte, each internal component will need to explicitly forward every possible event so that they can be used. The scope of this package is small enough that I could do that, but it would be annoying.
+
+One idea is to go the React-way and use [`on-*` props for event listeners](https://github.com/sveltejs/svelte/issues/2837#issuecomment-590605457). This would not be the ideal API, but it would work.
+
+For now, components will at least emit the following events:
+
+- `click`
+- `focus`
+- `blur`
+- `keypress`
+- `keydown`
+- `keyup`
 
 ### Dynamic elements
 
 Until [dynamic elements](https://github.com/sveltejs/svelte/issues/2324) are supported in Svelte, I'm using a modified internal version of [svelte-elements](https://github.com/timhall/svelte-elements) to support the `as` prop.
 
-## TODO
-
-### Components
+## Components
 
 - [x] Switch
 - [ ] Menu

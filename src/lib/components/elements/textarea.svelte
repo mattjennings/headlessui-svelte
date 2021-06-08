@@ -9,10 +9,12 @@
 <!-- prettier-ignore see: https://github.com/sveltejs/svelte/issues/6276 -->
 <textarea
   bind:this={el}
+  on:click
   on:focus
   on:blur
   on:keypress
-  on:click
+  on:keydown
+  on:keyup
   use:subscribe={listen}
   {...$$restProps}
 >
