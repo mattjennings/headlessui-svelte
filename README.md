@@ -89,6 +89,16 @@ For now, components will at least emit the following events:
 
 Until [dynamic elements](https://github.com/sveltejs/svelte/issues/2324) are supported in Svelte, I'm using a modified internal version of [svelte-elements](https://github.com/timhall/svelte-elements) to support the `as` prop.
 
+## SvelteKit
+
+You might get the following error (or similar) when running in development with SvelteKit:
+
+```
+Cannot read property 'default' of null
+```
+
+The fix is to restart the dev server. It only happens the first time `svelte-kit dev` is run and I'm not sure why.
+
 ## Components
 
 - [x] Switch
