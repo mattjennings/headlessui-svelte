@@ -16,7 +16,7 @@
   const idStore = useId()
 
   let element
-  const id = `headlessui-description-${$idStore}`
+  const id = `headlessui-switch-${$idStore}`
   // ---
 
   /**
