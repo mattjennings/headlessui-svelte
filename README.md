@@ -97,7 +97,20 @@ You might get the following error (or similar) when running in development with 
 Cannot read property 'default' of null
 ```
 
-The fix is to restart the dev server. It only happens the first time `svelte-kit dev` is run and I'm not sure why.
+This can be fixed by either restarting the dev server (for some reason it only happens the first time), or adding the library to `kit.vite.optimizeDeps.exclude` in svelte.config.js:
+
+```js
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+  kit: {
+    vite: {
+      optimizeDeps: {
+        exclude: ['@mattjennings/headlessui-svelte']
+      }
+    }
+  }
+}
+```
 
 ## Components
 
