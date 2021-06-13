@@ -1,6 +1,6 @@
 {
   "name": "@mattjennings/headlessui-svelte",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.3",
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
