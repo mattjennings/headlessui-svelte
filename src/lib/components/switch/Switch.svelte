@@ -8,15 +8,14 @@
   import { useId } from '../../internal/use-id'
   import { Keys } from '../keyboard'
 
+  let element
   const dispatch = createEventDispatcher()
   const forwardEvent = createEventForwarder()
   const groupContext = getGroupContext()
   const labelContext = getLabelContext()
   const descriptionContext = getDescriptionContext()
   const idStore = useId()
-
-  let element
-  const id = `headlessui-switch-${$idStore}`
+  $: id = `headlessui-switch-${$idStore}`
   // ---
 
   /**

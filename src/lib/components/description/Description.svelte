@@ -18,7 +18,7 @@
 
   const idStore = useId()
 
-  const id = `headlessui-description-${$idStore}`
+  $: id = `headlessui-description-${$idStore}`
 
   $context.register(id)
 
@@ -28,6 +28,7 @@
 <Render
   {as}
   {id}
+  name={$context.name}
   on:click
   on:focus
   on:blur
@@ -36,7 +37,7 @@
   on:keyup
   {...$$restProps}
   on:click={(ev) => {
-    $context.props?.onClick(ev)
+    $context.props?.onClick?.(ev)
     forwardEvent('click', ev)
   }}><slot /></Render
 >

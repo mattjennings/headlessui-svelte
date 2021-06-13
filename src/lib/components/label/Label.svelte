@@ -17,7 +17,7 @@
 
   const idStore = useId()
 
-  const id = `headlessui-label-${$idStore}`
+  $: id = `headlessui-label-${$idStore}`
 
   $context.register(id)
 
@@ -27,6 +27,7 @@
 <Render
   {id}
   {as}
+  name={$context.name}
   on:click
   on:focus
   on:blur
