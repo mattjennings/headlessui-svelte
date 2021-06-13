@@ -6,6 +6,7 @@
 
 </script>
 
+<!-- svelte-ignore a11y-label-has-associated-control -->
 <label
   bind:this={el}
   on:click

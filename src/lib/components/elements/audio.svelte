@@ -6,6 +6,7 @@
 
 </script>
 
+<!-- svelte-ignore a11y-media-has-caption -->
 <audio
   bind:this={el}
   on:click
