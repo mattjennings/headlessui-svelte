@@ -7,7 +7,7 @@
   export const SWITCH_GROUP_CONTEXT_KEY = 'headlessui-switch-group'
 
   /**
-   * @returns {import('./SwitchGroup.svelte').SwitchGroupContext}
+   * @returns {import('svelte/store').Writable<import('./SwitchGroup.svelte').SwitchGroupContext>}
    */
   export function getGroupContext() {
     return getContext(SWITCH_GROUP_CONTEXT_KEY)
@@ -16,7 +16,12 @@
 </script>
 
 <script>
-  const context = writable({})
+  /**
+   * @type {import('svelte/store').Writable<import('./SwitchGroup.svelte').SwitchGroupContext>}
+   */
+  const context = writable({
+    switch: null
+  })
   setContext(SWITCH_GROUP_CONTEXT_KEY, context)
 
 </script>
@@ -27,6 +32,7 @@
     props={{
       onClick() {
         if (!$context.switch) return
+        // @ts-ignore - 'This expression is not callable.' seems like a false-positive?
         $context.switch.click()
         $context.switch.focus({ preventScroll: true })
       }
