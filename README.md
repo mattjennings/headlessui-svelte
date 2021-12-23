@@ -1,3 +1,9 @@
+# This project is no longer maintained
+ 
+Please use [@rgossiaux/svelte-headlessui](https://github.com/rgossiaux/svelte-headlessui) instead as it is a full port of Headless UI. I had only managed to complete the Switch component, but @rgossiaux has done a fantastic job in getting full API coverage.
+
+---
+
 # headlessui-svelte
 
 Unofficial [Headless UI](https://headlessui.dev) Svelte components. Very much a work in progress, use with caution.
